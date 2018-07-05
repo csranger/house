@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <!--配置Mybatis全局属性-->
+    <settings>
+        <!-- 1.配置关闭缓存 -->
+        <setting name="cacheEnabled" value="false"/>
+
+        <!-- 2.开启驼峰命名规范 -->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+        <!-- 3.使用JDBC的getGeneratedKeys 获取数据库自增主键值，默认false -->
+        <setting name="useGeneratedKeys" value="true"/>
+
+        <!-- 4.  -->
+        <setting name="defaultExecutorType" value="REUSE"/>
+
+        <!-- 5.事务超时时间-->
+        <setting name="defaultStatementTimeout" value="600"/>
+
+    </settings>
+
+    <typeAliases>
+        <typeAlias type="com.csranger.house.common.model.User" alias="User"/>
+    </typeAliases>
+
+    <!--sql文件路径-->
+    <mappers>
+        <mapper resource="mapper/user.xml" />
+    </mappers>
+
+
+</configuration>
