@@ -28,8 +28,20 @@
     的键值对的值传递给Bean; MybatisProperties类上也有一个@ConfigurationProperties(prefix="mybatis")，所以可以将
     mybatis.config-location=classpath:/mybatis/mybatis-config.xml传递个MybatisProperties类中的属性
     
-4. 自定义 HttpClient 起步依赖:pom依赖 + HttpClientAutoConfiguration + HttpClientProperties + HttpClientAutoConfigurationTest
+4. 自定义 HttpClient 起步依赖
+    - pom依赖 + HttpClientAutoConfiguration + HttpClientProperties + HttpClientAutoConfigurationTest
 
 ### Maven 多 module 实现
 1. 多Module不是分布式，最终还是集成在一个jar包。好处：使得代码层次清晰，不同人负责不同部分，增加协同开发效率。
 2. house-biz:负责业务访问层和业务实现；house-common:负责定义数据模型和公共代码；house-web:负责定义启动类，controller，模版引擎
+3. 将主项目上的pom文件修改为artifactId>house-parent</artifactId><version>1.0.0-SNAPSHOT</version><packaging>pom</packaging>，
+然后在主项目文件上新建Module-Maven，Module-name为house-biz，Parent Project为hosue-parent；另外两个类似;然后将相应的文件资源以及pom
+依赖放入合适的Module里
+4. house-parent 里的pom依赖也会成为house-biz，house-common，house-web的依赖
+5. 注意启动类HouseApplication放在house-web中的com.csranger.house包下，而不是com.csranger.house.web 包下
+
+### 错误页面
+1. 错误页面路径配置 server.error.path(默认 error)
+2. 异常处理器进行日志输出
+
+
