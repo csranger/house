@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!--dao/user.xml实现mapper/UserMapper接口里的具体方法，所以这里的namespace是com.csranger.house.dao.UserMapper文件，将
+UserMapper接口和user.xml具体实现关联起来-->
+<mapper namespace="com.csranger.house.biz.dao.UserDao">
+
+    <!-- result 这里可简写为user，因为Mybatis配资文件中使用了typeAlias resultType将查询结果银蛇到user对象-->
+    <!--id就是实现接口方法的方法名-->
+    <select id="selectUsers" resultType="User">
+        select * from user
+    </select>
+
+
+    <!-- 没有agency_id，因为这个sql插入的是普通用户，不是经纪人 -->
+    <insert id="insert">
+        insert into user(name, phone, email, aboutme, passwd, avatar, type, create_time, enable)
+        values(#{name},#{phone},#{email},#{aboutme},#{passwd},#{avatar},#{type},#{createTime},#{enable})
+    </insert>
+
+    <delete id="delete">
+        delete from user where email=#{email}
+    </delete>
+
+    <update id="update">
+        update user
+        <set>
+            <if test="phone != null and phone != '' ">
+                phone = #{phone},
+            </if>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="aboutme != null and aboutme != '' ">
+                aboutme = #{aboutme},
+            </if>
+            <if test="passwd != null and passwd != '' ">
+                passwd = #{passwd},
+            </if>
+            <if test="enable != null">
+                enable = #{enable},
+            </if>
+        </set>
+        where email=#{email}
+    </update>
+
+    <select id="selectUsersByQuery" resultType="user">
+        select * from user
+        <where>
+            <if test="id !=null" >
+                and id = #{id}
+            </if>
+            <if test="email != null">
+                and email = #{email}
+            </if>
+            <if test="passwd != null">
+                and passwd = #{passwd}
+            </if>
+            <if test="enable != null">
+                and enable = #{enable}
+            </if>
+            <if test = "type != null and type!=0">
+                and type = #{type}
+            </if>
+        </where>
+    </select>
+
+</mapper>
