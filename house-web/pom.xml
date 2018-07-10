@@ -19,26 +19,6 @@
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
 
-
-        <!--使用Jetty替代tomcat-->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-            <exclusions>
-                <!-- Exclude the Tomcat dependency -->
-                <exclusion>
-                    <groupId>org.springframework.boot</groupId>
-                    <artifactId>spring-boot-starter-tomcat</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <!-- Use Jetty instead -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jetty</artifactId>
-        </dependency>
-
-
         <!--freemarker起步依赖-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

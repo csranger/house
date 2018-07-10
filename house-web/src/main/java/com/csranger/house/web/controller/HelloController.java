@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-@Controller     // 此处返回的不是Json
+@Controller
 public class HelloController {
 
     @Autowired

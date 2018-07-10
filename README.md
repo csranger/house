@@ -44,4 +44,32 @@
 1. 错误页面路径配置 server.error.path(默认 error)
 2. 异常处理器进行日志输出
 
+### 用户邮箱注册与验证
+1.
+2.
+3.nginx安装使用brew install redis  配置文件是 /usr/local/etc/nginx/nginx.conf 找到server相中进行以下配置
+- listen 8087      这是nginx端口，不要是8090，以免冲突
+- server_name   localhost  表示监听localhost
+- location /images  表示如果是/images路径就将它映射到一个资源文件 alias
+- charset utf-8
+- nginx 启动 lsof -i:8087 查看 nginx -s stop 关闭  http://localhost:8087 查看是否启动
+```
+server {
+        listen       8087;
+        server_name  localhost;
+
+	    charset utf-8;
+
+        #charset koi8-r;
+
+        #access_log  logs/host.access.log  main;
+
+        location /images {
+            alias /Users/hailong/opt/imgs;
+	        expires 1d;
+        }
+        ...
+}
+```
+
 
